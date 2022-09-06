@@ -3,7 +3,7 @@
  * @author 一抹晨曦
  */
 
-const { isProd } = require('../utils/env');
+const { isProd } = require('../utils/env')
 
 
 let REDIS_CONF = { 
@@ -11,15 +11,33 @@ let REDIS_CONF = {
     host:'127.0.0.1'
 }
 
+let MYSQL_CONF = {
+    host: 'localhost',
+    user: 'root',
+    paswords: '123456',
+    port: '3306',
+    database: 'koa2-weibo-code'
+}
+
 if(isProd) {
     REDIS_CONF = {
-        // 向上的 redis 配置
-         port:6379,
-         host:'127.0.0.1'
+        // 线上的 redis 配置
+        port:6379,
+        host:'127.0.0.1'
+    }
+
+    MUSQL_CONF = {
+        // 线上的 mysql 配置
+        host: 'localhost',
+        user: 'root',
+        paswords: '123456',
+        port: '3306',
+        database: 'koa2-weibo-code'
     }
 }
 
 
 module.exports = {
-    REDIS_CONF
+    REDIS_CONF,
+    MYSQL_CONF
 }

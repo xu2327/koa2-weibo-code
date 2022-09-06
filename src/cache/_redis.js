@@ -3,7 +3,7 @@
  * @author 一抹晨曦
  */
 
-const redis = require('redis');
+const redis = require('redis')
 const { REDIS_CONF } = require('../conf/db')
 
 // 创建客户端 

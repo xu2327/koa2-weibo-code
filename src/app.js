@@ -21,29 +21,29 @@ onerror(app) // ? 这是页面上显示报错信息
 // ? 通过AJAX请求，有json或者text数据 可以通过这个解析出来
 // middlewares
 app.use(bodyparser({
-  enableTypes: ['json', 'form', 'text']
+    enableTypes: ['json', 'form', 'text']
 }))
 app.use(json()) // ? 可以把json转变成对象形式
 // app.use(logger()) // ? 日志功能
 app.use(koaStatic(__dirname + '/public'))
 
 app.use(views(__dirname + '/views', {
-  extension: 'ejs'
+    extension: 'ejs'
 }))
 
 // session 配置
 app.keys = ['UIsdf_7878#$']
 app.use(session({
-  key: 'weibo.sid', // cookie name 默认是 `koa.sid`
-  prefix: 'weibo:sess:', // redis key 的前缀，默认是：`koa:sess:`
-  cookie: {
-    path: '/',
-    httpOnly: true,
-    maxAge: 24 * 60 * 1000, // ms
-  },
-  store: redisStore({
-    all: `${REDIS_CONF.host}:${REDIS_CONF.port}`
-  })
+    key: 'weibo.sid', // cookie name 默认是 `koa.sid`
+    prefix: 'weibo:sess:', // redis key 的前缀，默认是：`koa:sess:`
+    cookie: {
+        path: '/',
+        httpOnly: true,
+        maxAge: 24 * 60 * 1000, // ms
+    },
+    store: redisStore({
+        all: `${REDIS_CONF.host}:${REDIS_CONF.port}`
+    })
 }))
 
 // logger
@@ -62,7 +62,7 @@ app.use(users.routes(), users.allowedMethods())
 
 // error-handling
 app.on('error', (err, ctx) => {
-  console.error('server error', err, ctx)  // ? 这是打印 error 报错信息
-});
+    console.error('server error', err, ctx)  // ? 这是打印 error 报错信息
+})
 
 module.exports = app

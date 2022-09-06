@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "cross-env NODE_ENV=dev ./node_modules/.bin/nodemon bin/www",
     "prd": "cross-env NODE_ENV=production pm2 start bin/www",
+    "lint":"eslint --ext .js ./src",
     "test": "cross-env NODE_ENV=test jest --runInBand --forceExit --colors"
   },
   "dependencies": {
@@ -38,5 +39,8 @@
     "nodemon": "^1.19.1",
     "pre-commit": "^1.2.2",
     "supertest": "^4.0.2"
-  }
+  },
+  "pre-commot": [
+    "lint"
+  ]
 }
