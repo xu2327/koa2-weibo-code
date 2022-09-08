@@ -16,7 +16,7 @@ let MYSQL_CONF = {
     user: 'root',
     paswords: '123456',
     port: '3306',
-    database: 'koa2-weibo-code'
+    database: 'koa2_weibo_db'
 }
 
 if(isProd) {
@@ -32,7 +32,7 @@ if(isProd) {
         user: 'root',
         paswords: '123456',
         port: '3306',
-        database: 'koa2-weibo-code'
+        database: 'koa2_weibo_db'
     }
 }
 

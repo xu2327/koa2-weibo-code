@@ -5,17 +5,17 @@
 
 const seq = require('./seq')
 
-// require('./model')
+require('./model/index')
 
 // 测试连接
-seq.authenticate().then(()=>{
+seq.authenticate().then(() => {
     console.log('sync ok')
-}).catch(()=>{
+}).catch(() => {
     console.log('sync err')
 })
 
 // 执行同步
-seq.sync({ force: true }).then(()=>{
+seq.sync({ force: true }).then(() => {
     console.log('sync ok')
     // 推出出去，不然会一直占用内存
     process.exit()

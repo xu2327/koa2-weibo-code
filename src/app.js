@@ -14,7 +14,8 @@ const { isProd } = require('./utils/env')
 
 // ? 引入了一些路由的注册文件 
 const index = require('./routes/index')
-const users = require('./routes/users')
+const userViewRouter = require('./routes/view/user')
+const userAPIRouter = require('./routes/api/user')
 const errorViewRouter = require('./routes/view/error') 
 
 //* error handler
@@ -61,9 +62,9 @@ app.use(session({
 // routes
 
 app.use(index.routes(), index.allowedMethods())
-app.use(users.routes(), users.allowedMethods())
-// 404 路由一定要注册到最后面 因为匹配了 *
-app.use(errorViewRouter.routes(),errorViewRouter.allowedMethods())
+app.use(userViewRouter.routes(),userViewRouter.allowedMethods())
+app.use(userAPIRouter.routes(),userAPIRouter.allowedMethods())
+app.use(errorViewRouter.routes(),errorViewRouter.allowedMethods()) //! 404 路由一定要注册到最后面 因为匹配了 *
 
 // error-handling
 app.on('error', (err, ctx) => {
