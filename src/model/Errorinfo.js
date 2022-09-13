@@ -32,7 +32,7 @@ module.exports = {
     // 修改密码失败
     changePasswordFailInfo: {
         errno: 10006,
-        messgae: '修改密码失败，请重试'
+        message: '修改密码失败，请重试'
     },
     // 上传文件过大
     uploadFileSizeFailInfo: {
@@ -42,17 +42,17 @@ module.exports = {
     // 修改基本信息失败
     changeInfoFailInfo: {
         errno: 10008,
-        messgae: '修改基本信息失败'
+        message: '修改基本信息失败'
     },
     // json schema 校验失败
     jsonSchemaFileInfo: {
         errno: 10009,
-        messgae: '数据格式校验错误'
+        message: '数据格式校验错误'
     },
     // 删除用户失败
     deleteUserFailInfo: {
         errno: 10010,
-        messgae: '删除用户失败'
+        message: '删除用户失败'
     },
     // 添加关注失败
     addFollowerFailInfo: {
@@ -72,6 +72,6 @@ module.exports = {
     // 删除微博失败
     deleteBlogFailInfo: {
         errno: 11002,
-        messgae: '删除微博失败，请重试'
+        message: '删除微博失败，请重试'
     }
 }

@@ -48,7 +48,6 @@ async function createUser({ userName, password, gender = 3, nickName }) {
         nickName: nickName ? nickName : userName,
         gender
     })
-
     return result.dataValues
 }
 
