@@ -69,7 +69,7 @@ app.use(errorViewRouter.routes(),errorViewRouter.allowedMethods()) //! 404 路�
 
 // error-handling
 app.on('error', (err, ctx) => {
-    console.error('server error', err, ctx)  // ? 这是打印 error 报错信息
+    console.error('server error', err, ctx)  //  这是打印 error 报错信息
 })
 
 module.exports = app
