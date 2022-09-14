@@ -3,14 +3,20 @@
  * @author 一抹晨曦
  */
 
-const { getUserInfo, createUser, deleteUser } = require('../services/user')
+const {
+    getUserInfo,
+    createUser,
+    deleteUser,
+    updateUser
+} = require('../services/user')
 const { SuccessModel, ErrorModel } = require('../model/ResModel')
 const {
     registerUserNameNotExistInfo,
     registerUserNameExistInfo,
     registerFailInfo,
     loginFailInfo,
-    deleteUserFailInfo
+    deleteUserFailInfo,
+    changeInfoFailInfo
 } = require('../model/Errorinfo')
 const doCrypto = require('../utils/cryp')
 /**
@@ -62,10 +68,10 @@ async function register({ userName, password, gender }) {
  * @param {string} userName 用户名
  * @param {string} password 密码
  */
-async function login(ctx,userName,password) {
+async function login(ctx, userName, password) {
     // 获取用户信息
-    const userInfo = await getUserInfo(userName,doCrypto(password))
-    if(!userInfo) {
+    const userInfo = await getUserInfo(userName, doCrypto(password))
+    if (!userInfo) {
         // 登录失败
         return new ErrorModel(loginFailInfo)
     }
@@ -83,18 +89,53 @@ async function login(ctx,userName,password) {
  */
 async function deleteCurUser(userName) {
     const result = await deleteUser(userName)
-    if(result) {
+    if (result) {
         // 成功
         return new SuccessModel()
     }
     // 失败
     return new ErrorModel(deleteUserFailInfo)
+}
 
+/**
+ * 修改个人信息
+ * @param {Object} ctx ctx
+ * @param {string} nickName 名称
+ * @param {string} city 城市
+ * @param {string} picture 头像
+ */
+async function changeInfo(ctx, { nickName, city, picture }) {
+    const { userName } = ctx.session.userInfo
+    if (!nickName) {
+        nickName = userName
+    }
+
+    const result = await updateUser(
+        {
+            newNickName:nickName,
+            newCity: city,
+            newPicture: picture
+        },
+        { userName }
+    )
+    if(result) {
+        // 执行成功
+        Object.assign(ctx.session.userInfo, {
+            nickName,
+            city,
+            picture
+        })
+        // 返回
+        return new SuccessModel()
+    }
+    // 失败
+    return new ErrorModel(changeInfoFailInfo)
 }
 
 module.exports = {
     isExist,
     register,
     login,
-    deleteCurUser
+    deleteCurUser,
+    changeInfo
 }
