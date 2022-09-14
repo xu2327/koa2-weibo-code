@@ -22,7 +22,7 @@ function _formatUserPicture(obj) {
  */
 function formatUser(list) {
     if (list == null) {
-        return
+        return list
     }
 
     if (list instanceof Array) {

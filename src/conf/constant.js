@@ -4,5 +4,5 @@
  */
 
 module.exports = {
-    DEFAULT_PICTURE: '../public/images/1.jpg'
+    DEFAULT_PICTURE: 'https://tse1-mm.cn.bing.net/th/id/OIP-C.yhBsaDj472cwH4yC9IHuBgAAAA?pid=ImgDet&rs=1'
 }
