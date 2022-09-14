@@ -1,3 +1,4 @@
+const path = require('path')
 const Koa = require('koa')
 const app = new Koa()
 const views = require('koa-views')
@@ -15,6 +16,7 @@ const { SESSION_SECRET_KEY } = require('./conf/secretKeys')
 
 // ? 引入了一些路由的注册文件 
 const index = require('./routes/index')
+const utilsAPIRouter = require('./routes/api/utils')
 const userViewRouter = require('./routes/view/user')
 const userAPIRouter = require('./routes/api/user')
 const errorViewRouter = require('./routes/view/error') 
@@ -38,6 +40,7 @@ app.use(bodyparser({
 app.use(json()) // ? 可以把json转变成对象形式
 // app.use(logger()) // ? 日志功能
 app.use(koaStatic(__dirname + '/public'))
+app.use(koaStatic(path.join(__dirname,'..','uploadFiles')))
 
 app.use(views(__dirname + '/views', {
     extension: 'ejs'
@@ -63,6 +66,7 @@ app.use(session({
 // routes
 
 app.use(index.routes(), index.allowedMethods())
+app.use(utilsAPIRouter.routes(),utilsAPIRouter.allowedMethods())
 app.use(userViewRouter.routes(),userViewRouter.allowedMethods())
 app.use(userAPIRouter.routes(),userAPIRouter.allowedMethods())
 app.use(errorViewRouter.routes(),errorViewRouter.allowedMethods()) //! 404 路由一定要注册到最后面 因为匹配了 *
