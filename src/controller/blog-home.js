@@ -2,7 +2,7 @@
  * @description 首页 controller
  * @author 一抹晨曦
  */
-
+const xss = require('xss')
 const { SuccessModel, ErrorModel } = require('../model/ResModel')
 const { createBlogFailInfo } = require('../model/Errorinfo')
 const { createBlog } = require('../services/blog')
@@ -16,7 +16,7 @@ async function create({ userId, content, image }) {
         // 创建微博
         const blog = await createBlog({
             userId,
-            content,
+            content: xss(content),
             image
         })
         return new SuccessModel(blog)
