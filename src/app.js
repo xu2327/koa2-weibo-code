@@ -14,7 +14,8 @@ const { REDIS_CONF } = require('./conf/db')
 const { isProd } = require('./utils/env')
 const { SESSION_SECRET_KEY } = require('./conf/secretKeys')
 
-// ? 引入了一些路由的注册文件 
+// ? 路由
+const HomeAPIRouter = require('./routes/api/blog-home')
 const blogViewRouter = require('./routes/view/blog')
 const utilsAPIRouter = require('./routes/api/utils')
 const userViewRouter = require('./routes/view/user')
@@ -64,6 +65,7 @@ app.use(session({
 
 // ? 注册路由
 // routes
+app.use(HomeAPIRouter.routes(),HomeAPIRouter.allowedMethods())
 app.use(blogViewRouter.routes(),blogViewRouter.allowedMethods())
 app.use(utilsAPIRouter.routes(),utilsAPIRouter.allowedMethods())
 app.use(userViewRouter.routes(),userViewRouter.allowedMethods())
