@@ -23,7 +23,7 @@ async function createBlog({ userId, content, image }) {
  * 根据用户获取微博列表
  * @param {Object} param0 查询参数  { userName, pageIndex = 0, pageSize = 10 }
  */
-async function getBlogListByUser({ userName, pageIndex = 0, pageSize = 5 }) {
+async function getBlogListByUser({ userName, pageIndex = 0, pageSize = 10 }) {
     // 拼接查询条件
     const userwhereOpts = {}
     if (userName) {
@@ -49,10 +49,8 @@ async function getBlogListByUser({ userName, pageIndex = 0, pageSize = 5 }) {
     // result.rows 查询结果，数组
 
     // 获取 dataValues
-    let blogList = result.rows.map(row => row.dataValues)
+    let blogList = result.rows.map(row => formatBlog(row.dataValues))
 
-    // 格式化
-    blogList = formatBlog(blogList)
     blogList = blogList.map(blogItem => {
         const user = blogItem.user.dataValues
         blogItem.user = formatUser(user)

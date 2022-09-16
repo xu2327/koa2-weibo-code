@@ -19,7 +19,6 @@ const { addFollowerFailInfo, deleteFollowerFailInfo } = require('../model/Errori
  */
 async function getFans(userId) {
     const { count, userList } = await getUsersByFollower(userId)
-
     // 返回
     return new SuccessModel({
         count,

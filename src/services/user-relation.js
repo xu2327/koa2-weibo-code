@@ -16,7 +16,7 @@ async function getUsersByFollower(followerId) {
         order: [
             ['id', 'desc']
         ],
-        inclued: [
+        include: [
             {
                 model: UserRelation,
                 where: {

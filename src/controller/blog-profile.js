@@ -15,7 +15,7 @@ async function getProfileBlogList(userName, pageIndex = 0) {
     const result = await getBlogListByUser({
         userName,
         pageIndex,
-        PageSize: PAGE_SIZE
+        pageSize: PAGE_SIZE
     })
     const blogList = result.blogList
 

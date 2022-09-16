@@ -6,7 +6,7 @@
 const seq = require('../seq')
 const { INTEGER } = require('../types')
 
-const UserRelation = seq.define('userRelation',{
+const UserRelation = seq.define('userRelation', {
     userId: {
         type: INTEGER,
         allowNull: false,
