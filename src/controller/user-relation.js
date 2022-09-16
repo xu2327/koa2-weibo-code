@@ -3,9 +3,15 @@
  * @author 一抹晨曦
  */
 
+const {
+    getUsersByFollower,
+    getFollowersByUser,
+    addFollower,
+    deleteFollower
+} = require('../services/user-relation')
 const { SuccessModel, ErrorModel } = require('../model/ResModel')
-const { addFollowerFailInfo,deleteFollowerFailInfo } = require('../model/Errorinfo')
-const { getUsersByFollower, addFollower, deleteFollower } = require('../services/user-relation')
+const { addFollowerFailInfo, deleteFollowerFailInfo } = require('../model/Errorinfo')
+
 
 /**
  * 根据 userid 获取粉丝列表
@@ -22,6 +28,18 @@ async function getFans(userId) {
 
 }
 
+/**
+ * 获取关注人列表
+ * @param {number} userId userId
+ */
+async function getFollowers(userId) {
+    const { count, userList } = await getFollowersByUser(userId)
+
+    return new SuccessModel({
+        count,
+        followersList: userList
+    })
+}
 
 /**
  * 关注
@@ -53,6 +71,7 @@ async function unFollow(myUserId, curUserId) {
 
 module.exports = {
     getFans,
+    getFollowers,
     follow,
     unFollow
 }
