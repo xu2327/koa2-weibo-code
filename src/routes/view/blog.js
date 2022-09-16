@@ -9,29 +9,11 @@ const { getProfileBlogList } = require('../../controller/blog-profile')
 const { getSquareBlogList } = require('../../controller/blog-square')
 const { isExist } = require('../../controller/user')
 const { getHomeBlogList } = require('../../controller/blog-home')
-const { genFans, getFans } = require('../../controller/user-relation')
+const { getFans } = require('../../controller/user-relation')
 
 // 首页
 router.get('/', loginRedirect, async (ctx, next) => {
-    const userInfo = ctx.session.userInfo
-    const { id: userId } = userInfo
-
-    // 获取第一页数据
-    const result = await getHomeBlogList(userId)
-    const { isEmpty, blogList, pageSize, pageIndex, count } = result.data
-
-    await ctx.render('index', {
-        userData: {
-            userInfo,
-        },
-        blogData: {
-            isEmpty,
-            blogList,
-            pageSize,
-            pageIndex,
-            count
-        }
-    })
+    await ctx.render('index',{})
 })
 
 // 个人首页
@@ -69,6 +51,10 @@ router.get('/profile/:userName', loginRedirect, async (ctx, next) => {
     const fansResult = await getFans(curUserInfo.id)
     const { count: fansCount, fansList } = fansResult.data
 
+    // 我是否关注了此人?
+    const amIFollowed = fansList.some(item => {
+        return item.userName === myUserName
+    })
 
 
     await ctx.render('profile', {
@@ -84,8 +70,9 @@ router.get('/profile/:userName', loginRedirect, async (ctx, next) => {
             isMe,
             fansData: {
                 count: fansCount,
-                list: fansList
-            }
+                list: fansList,
+            },
+            amIFollowed
         }
     })
 })
