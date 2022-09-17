@@ -60,7 +60,6 @@ router.get('/profile/:userName', loginRedirect, async (ctx, next) => {
     const amIFollowed = fansList.some(item => {
         return item.userName === myUserName
     })
-    console.log(amIFollowed)
 
 
     await ctx.render('profile', {
