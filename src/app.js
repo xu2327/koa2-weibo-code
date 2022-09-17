@@ -15,6 +15,7 @@ const { isProd } = require('./utils/env')
 const { SESSION_SECRET_KEY } = require('./conf/secretKeys')
 
 // ? 路由
+const atAPIRouter = require('./routes/api/blog-at')
 const squareAPIRouter = require('./routes/api/blog-square')
 const profileAPIRouter = require('./routes/api/blog-profile')
 const HomeAPIRouter = require('./routes/api/blog-home')
@@ -67,6 +68,7 @@ app.use(session({
 
 // ? 注册路由
 // routes
+app.use(atAPIRouter.routes(), atAPIRouter.allowedMethods())
 app.use(squareAPIRouter.routes(),squareAPIRouter.allowedMethods())
 app.use(profileAPIRouter.routes(),profileAPIRouter.allowedMethods())
 app.use(HomeAPIRouter.routes(),HomeAPIRouter.allowedMethods())
