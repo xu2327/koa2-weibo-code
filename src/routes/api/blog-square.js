@@ -6,7 +6,7 @@
 const router = require('koa-router')()
 const { loginCheck } = require('../../middlewares/loginChecks')
 const { getSquareBlogList } = require('../../controller/blog-square')
-const { gerBlogListStr } = require('../../utils/blog')
+const { getBlogListStr } = require('../../utils/blog')
 
 router.prefix('/api/square')
 
@@ -17,7 +17,7 @@ router.get('/loadMore/:pageIndex', loginCheck, async (ctx, next) => {
     const result = await getSquareBlogList(pageIndex)
 
     // 渲染成 html 字符串
-    result.data.blogListTpl = gerBlogListStr(result.data.blogList)
+    result.data.blogListTpl = getBlogListStr(result.data.blogList)
 
     ctx.body = result
 })

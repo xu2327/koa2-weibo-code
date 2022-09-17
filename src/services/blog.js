@@ -3,7 +3,7 @@
  * @author 一抹晨曦
  */
 
-const { Blog, User } = require('../db/model/index')
+const { Blog, User, UserRelation } = require('../db/model/index')
 const { formatUser,formatBlog } = require('./_format')
 
 /**
@@ -77,13 +77,18 @@ async function getFollowersBlogList({ userId, pageIndex = 0, pageSize = 10 }) {
             {
                 model: User,
                 attributes: ['userName', 'nickName', 'picture']
+            },
+            {
+                model: UserRelation,
+                attributes: ['userId', 'followerId'],
+                where: { userId }
             }
         ]
     })
-    console.log(result.rows)
+
     // 格式化数据
-    let blogList = result.rows.map(row => formatBlog(row.dataValues))
-    
+    let blogList = result.rows.map(row => row.dataValues)
+    blogList = formatBlog(blogList)
     blogList = blogList.map(blogItem => {
         blogItem.user = formatUser(blogItem.user.dataValues)
         return blogItem

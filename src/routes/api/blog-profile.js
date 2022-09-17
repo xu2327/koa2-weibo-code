@@ -7,7 +7,7 @@ const router = require('koa-router')()
 const { loginCheck } = require('../../middlewares/loginChecks')
 const { getProfileBlogList } = require('../../controller/blog-profile')
 const { follow, unFollow } = require('../../controller/user-relation')
-const { gerBlogListStr } = require('../../utils/blog')
+const { getBlogListStr } = require('../../utils/blog')
 
 router.prefix('/api/profile')
 
@@ -18,7 +18,7 @@ router.get('/loadMore/:userName/:pageIndex', loginCheck, async (ctx, next) => {
     const result = await getProfileBlogList(userName, pageIndex)
 
     // 渲染成 html 字符串
-    result.data.blogListTpl = gerBlogListStr(result.data.blogList)
+    result.data.blogListTpl = getBlogListStr(result.data.blogList)
 
     ctx.body = result
 })

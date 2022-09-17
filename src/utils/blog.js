@@ -18,7 +18,7 @@ const BLOG_LIST_TPL = fs.readFileSync(
  * @param {boolean} canReply 是否可以恢复
  * @returns 
  */
-function gerBlogListStr(blogList = [], canReply = false) {
+function getBlogListStr(blogList = [], canReply = false) {
     return ejs.render(BLOG_LIST_TPL,{
         blogList,
         canReply
@@ -26,5 +26,5 @@ function gerBlogListStr(blogList = [], canReply = false) {
 }
 
 module.exports = {
-    gerBlogListStr
+    getBlogListStr
 }
