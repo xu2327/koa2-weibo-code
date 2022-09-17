@@ -3,7 +3,7 @@
  * @author 一抹晨曦
  */
 
-const { getAtRelationCount, getAtUserBlogList } = require('../services/at-relation')
+const { getAtRelationCount, getAtUserBlogList, updateAtRelation } = require('../services/at-relation')
 const { SuccessModel } = require('../model/ResModel')
 const { PAGE_SIZE, REG_FOR_AT_WHO } = require('../conf/constant')
 
@@ -41,7 +41,26 @@ async function getAtMeBlogList(userId, pageIndex = 0) {
     })
 }
 
+/**
+ * 标记为已读
+ * @param {number} userId userId
+ */
+async function markAsRead(userId) {
+    try {
+        await updateAtRelation(
+            { newIsRead: true },
+            { userId, isRead: false }
+        )
+    } catch (ex) {
+        console.error(ex)
+    }
+
+    // 不需要返回 SuccessModel 或者 ErrorModel
+    // 因为是在页面渲染之后返回的，所以不用返回
+}
+
 module.exports = {
     getAtMeCount,
-    getAtMeBlogList
+    getAtMeBlogList,
+    markAsRead
 }
