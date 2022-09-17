@@ -4,15 +4,14 @@
  */
 
 /**
- * 【特别提醒】cookie 是用户的敏感信息，此处只能是**测试**用户的 cookie
- * 每次测试用户重新登录，都需要更新这里的 cookie
+ * !【特别提醒】cookie 是用户的敏感信息，此处只能是**测试**用户的 cookie
+ * ! 每次测试用户重新登录，都需要更新这里的 cookie
  */
 module.exports = {
     X_ID: 1,
     X_USER_NAME:'xw123',
-    X_COOKIE: 'weibo.sid=wJRczPUO29jiUx0ksc6bBizI_8pZZYWj; weibo.sid.sig=w8m_fJNFmhFFu7cN8o68Zd7x2dY',
+    X_COOKIE: 'weibo.sid=meKH86d86knFWYFfiHLNBTM0WYQufjO1; weibo.sid.sig=jdNQABagDHriA7se9mFU06wDgoc',
 
     H_ID: 2,
     H_USER_NAME: 'huda',
-    H_COOKIE: 'weibo.sid=wJRczPUO29jiUx0ksc6bBizI_8pZZYWj; weibo.sid.sig=w8m_fJNFmhFFu7cN8o68Zd7x2dY'
 }
