@@ -21,7 +21,6 @@ async function create({ userId, content, image }) {
         })
 
         
-
         return new SuccessModel(blog)
     } catch (ex) {
         console.error(ex.message, ex.stack)
